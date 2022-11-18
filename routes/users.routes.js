@@ -1,16 +1,18 @@
 const listUsers = require('./../user/listUser');
+const createUser = require('./../user/createUser');
+const deleteUser = require('./../user/deleteUser');
+const updateUser = require('./../user/updateUser');
 const methodUsers = [
     {
         url: '/users',
         method: 'GET',
         handler: async (request, response) => {
-            const users = await listUsers.listarUsuarios();
-            //console.log('sadasdasdasdasdasda',users);
+            const users = await listUsers.listUsers();
             response.send(users)
         }
     },
     {
-        url: '/users/:email',
+        url: '/users/search/:email',
         method: 'GET',
         handler: (request, response) => {
             response.send('usuarios')
@@ -19,22 +21,25 @@ const methodUsers = [
     {
         url: '/users/create',
         method: 'POST',
-        handler: (request, response) => {
-            response.send('usuarios')
+        handler: async (request, response) => {
+            const users = await createUser.createUser(request);
+            response.send(users)
         }
     },
     {
-        url: '/users/delete/:email',
+        url: '/users/delete/:id',
         method: 'DELETE',
-        handler: (request, response) => {
-            response.send('usuarios')
+        handler: async (request, response) => {
+            const users = await deleteUser.deleteUser(request);
+            response.send(users)
         }
     },
     {
-        url: '/users/update/:email',
+        url: '/users/update',
         method: 'PUT',
-        handler: (request, response) => {
-            response.send('usuarios')
+        handler: async (request, response) => {
+            const users = await updateUser.updateUser(request);
+            response.send(users)
         }
     }
 ]
