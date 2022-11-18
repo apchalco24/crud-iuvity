@@ -1,9 +1,12 @@
+const listUsers = require('./../user/listUser');
 const methodUsers = [
     {
         url: '/users',
         method: 'GET',
-        handler: (request, response) => {
-            response.send('usuarios')
+        handler: async (request, response) => {
+            const users = await listUsers.listarUsuarios();
+            //console.log('sadasdasdasdasdasda',users);
+            response.send(users)
         }
     },
     {
